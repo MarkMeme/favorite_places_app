@@ -23,20 +23,30 @@ class PlacesList extends StatelessWidget {
 
     return ListView.builder(
       itemCount: places.length,
-      itemBuilder: (ctx, index) => ListTile(
-        title: Text(
-          places[index].title,
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-        ),
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (ctx) => PlaceDetailScreen(place: places[index]),
+      itemBuilder: (ctx, index) => Padding(
+        padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
+        child: ListTile(
+          leading: Hero(
+            tag: places[index].id,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundImage: FileImage(places[index].image),
             ),
-          );
-        },
+          ),
+          title: Text(
+            places[index].title,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+          ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => PlaceDetailScreen(place: places[index]),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
